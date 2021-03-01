@@ -8,50 +8,71 @@ const experimentResults = [
 ]
 
 // What was participant three's time on the first test?
-// const participant3 = experimentResults[2]
-console.log("Participant 3's first result")
-// console.log(participant3[0])
-console.log(experimentResults[2][0])
+
+const participantThree = experimentResults[2]
+console.log(participantThree);
+const firstTest = participantThree[0]
+console.log(`Participant 3's first test had a time of ${firstTest}`);
 
 // What is participant 2's average?
-const participant2Results = experimentResults[1]
-let totalResults = participant2Results.reduce((accumulator, currentValue) => {
-  return accumulator + currentValue
+
+const participantTwo = experimentResults[1]
+
+// let sum = 0
+// participantTwo.forEach(score => {
+//   sum += score
+// })
+
+let sum = participantTwo.reduce((accumulator, currentValue) => {
+  return accumulator += currentValue
 })
-let average = totalResults / participant2Results.length
-console.log(average)
+
+console.log(sum);
+let average = sum/participantTwo.length
+console.log(`The average time for Participant 2 is ${average}`)
 
 // Create a new array of all third test times
-let thirdTestTimes = experimentResults.map((singleParticipantResults) => {
-  console.log(singleParticipantResults)
 
-  return singleParticipantResults[2]
-})
-console.log(thirdTestTimes)
-
-// What was the average grade on test 1?
-
-// What was the worst score on exam 2?
-// let secondTestTimes = experimentResults.map((singleParticipantResults) => {
-// return singleParticipantResults[1]
+// let thirdTestTimes = []
+// experimentResults.forEach(participant => {
+//   thirdTestTimes.push(participant[2])
 // })
-// console.log('Second test times', secondTestTimes)
-// let worstScore
-// secondTestTimes.forEach((timeOnTest2) => {
-//   debugger
-//   if (!worstScore || timeOnTest2 > worstScore) {
-//     worstScore = timeOnTest2
+
+let thirdTestTimes = experimentResults.map(participant => {
+  return participant[2]
+})
+
+console.log("thirdTestTimes", thirdTestTimes)
+
+// What was the average time on test 1?
+
+
+// What was the worst time on exam 2?
+
+// figure out the times for exam 2
+// let secondTestTimes = experimentResults.map(participant => participant[1])
+// console.log("secondTestTimes", secondTestTimes)
+// let worstTime = Math.max(...secondTestTimes)
+
+// figure out which one is the worst
+// let worstTime = secondTestTimes[0]
+// secondTestTimes.forEach(testTime => {
+//   // if the next test time is slower than the "worstTime", we want to reset the "worstTime"
+//   if(testTime > worstTime) {
+//     worstTime = testTime
 //   }
 // })
 
-let worstScore
-experimentResults.forEach((participantResults) => {
-  const timeOnTest2 = participantResults[1]
-  if (!worstScore || timeOnTest2 > worstScore) {
-    worstScore = timeOnTest2
+let worstTime = 0
+experimentResults.forEach(participant => {
+  if(participant[1] > worstTime) {
+    worstTime = participant[1]
   }
 })
-console.log('worst score', worstScore)
+
+console.log(`The worst second test time is ${worstTime}`);
+
+
 
 // Compound Data Structures: Disney Princesses and Animal Sidekicks
 const princessData = {
@@ -108,41 +129,53 @@ const princessData = {
 }
 
 // Print out a list of all the princesses' names
-let princessOutput = 'Princess Names:\n'
-princessData.princesses.forEach((princess) => {
-  princessOutput += `${princess.name}\n`
+
+
+let list = `A list of all the princesses:\n`
+princessData.princesses.forEach(princess => {
+  // list += princess.name + "/n"
+  list += `${princess.name}\n`
 })
-console.log(princessOutput)
+
+console.log(list);
+
 
 // Print out the name and species of Moana's sidekicks
-let moanaOutput = "Moana's Sidekicks:\n"
-const moanaSidekicks = princessData.princesses[1].sidekicks
-moanaSidekicks.forEach((sidekick) => {
-  moanaOutput += `- ${sidekick.name} the ${sidekick.species}\n`
-})
-console.log(moanaOutput)
 
-// Optional depending on time: Create an array with the names of all of the intelligent animals
+let sidekickList = `Moana's sidekicks are:\n`
+// let moana = princessData.princesses[1]
+let moana = princessData.princesses.find(princess => {
+  return princess.name === "Moana"
+})
+
+moana.sidekicks.forEach(sidekick => {
+sidekickList += `- ${sidekick.name} the ${sidekick.species}\n`
+})
+
+console.log(sidekickList);
+
 
 // Create a new array with the names of all of the animals with a favorite snack
 
-console.log('princesses', princessData.princesses)
+// create a new array -- map()
+// names of all animals WITH A FAVORITE SNACK
 
+// get an array with ALL sidekicks
 let allSidekicks = []
 
-princessData.princesses.forEach((princess) => {
+princessData.princesses.forEach(princess => {
+  // add princess.sidekicks to allSidekicks array
   allSidekicks = allSidekicks.concat(princess.sidekicks)
 })
-console.log('allSidekicks', allSidekicks)
 
-let hungrySidekicks = allSidekicks.filter((sidekick) => {
+console.log(allSidekicks)
+
+// go through and get the sidekicks that have a favorite snack
+let hungrySidekicks = allSidekicks.filter(sidekick => {
   return !!sidekick.favoriteSnack
 })
 
-console.log('hungry sidekicks', hungrySidekicks)
+console.log("hungrySidekicks", hungrySidekicks);
 
-let hungrySidekickNames = hungrySidekicks.map((sidekick) => {
-  return sidekick.name
-})
 
-console.log('hungry sidekick names', hungrySidekickNames)
+// Optional depending on time: Create an array with the names of all of the intelligent animals
